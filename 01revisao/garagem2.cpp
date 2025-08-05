@@ -20,7 +20,6 @@ int main(){
     int opcao = 1;
 
     while(opcao != 4){
-        system("cls");
         cout << "M E N U\n";
         cout << " 1 - Veículo Entra\n";
         cout << "2 - Veículo Sai\n";
@@ -69,10 +68,11 @@ int main(){
         cout << "Opção inválida, tente novamente\n";
             break;
         }
-        system("pause");
+    
     }
 
     return 1;
 
 
 }
+//verificar se o carro já está na garagem
