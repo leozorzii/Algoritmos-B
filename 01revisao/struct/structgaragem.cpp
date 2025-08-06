@@ -19,6 +19,10 @@ int main(){
     int quantidadeCarros = 0;
     int opcao = 1;
 
+
+
+
+    
     while(opcao != 4){
         cout << "M E N U\n";
         cout << " 1 - Veículo Entra\n";
@@ -34,6 +38,15 @@ int main(){
         if(quantidadeCarros == TAM){
             cout << "garagem cheia\n";
         }else{
+            bool jaEstaNaGaragem = false;
+            for(int i=0; i<quantidadeCarros; i++){
+                if(garagem[i].placas == carro.placas){
+                    jaEstaNaGaragem = true;
+                    cout << "carro ja esta na garagem\n";
+                    break;
+                }
+            }
+            
             cout << "placa: ";
             cin >> carro.placas;
             cout << "hora de entrada: ";
@@ -42,8 +55,8 @@ int main(){
             garagem[ quantidadeCarros ] = carro;
             quantidadeCarros++;
             cout <<"imprimindo ticket\n";
+                    break;
         }
-            break;
          case 2:
         cout << "saindo da garagem\n";
             break;
