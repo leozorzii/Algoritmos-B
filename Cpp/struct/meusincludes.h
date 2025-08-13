@@ -5,5 +5,6 @@
     string celular;
     string data;
     string descricao;
+    string hora;
 
 }Emprestimo;

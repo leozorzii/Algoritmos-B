@@ -103,6 +103,7 @@ int main()
 
                     cout << "item: " << meusItens[i].descricao << endl;
                     cout << "Pessoa: " << meusItens[i].nome << endl;
+                    cout << "Numero: " << meusItens[i].celular << endl;
                     cout << "Data: " << meusItens[i].data << endl;
                     cout << "Horario: " << meusItens[i].hora << endl;
 
