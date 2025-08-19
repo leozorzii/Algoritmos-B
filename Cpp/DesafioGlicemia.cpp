@@ -4,10 +4,6 @@
 #include <limits>
 #include <iomanip>
 
-/*fechei os cases 3 e 4 com chaves por causa do
-swtich nao criar o escopo correto, sendo desviado antes da variavel
-ser iniciada*/
-
 #define TAM 5
 using namespace std;
 
@@ -30,7 +26,7 @@ using namespace std;
             cout << "Opcao invalida.\n";
             continue;
         }
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); //para limpar sem usar fflush(stdin)
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); 
 
             switch(opcao) {
             case 1:
@@ -88,8 +84,8 @@ using namespace std;
                 double soma = 0.0L;
 
                 for(int i=0 ; i < qtdGlicemica; ++i)soma += indices[i];
-                    double media = static_cast<double>(soma / qtdGlicemica);
-                    cout << fixed << setprecision(2)//imprime em ponto fixo, com casas decimais
+                    double media = static_cast<double>(soma / qtdGlicemica);//cast pra obrigar a variavel a ser double
+                    cout << fixed << setprecision(2)//imprimir em ponto fixo, com casas decimais
                         << "Media: " << media << endl;
                     break; 
                 }
@@ -110,7 +106,7 @@ using namespace std;
             } else {
                     mediana = (tmp[qtdGlicemica /2 -1] + tmp[qtdGlicemica /2]) /2.0;
             }
-                cout << fixed << setprecision(2);//numero fixo com duas casas apos a virgula
+                cout << fixed << setprecision(2);//colocar duas casas dps da virgula
                 cout << "Mediana: " << mediana << endl;
             break;
             }
