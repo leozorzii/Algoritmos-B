@@ -33,15 +33,34 @@ int main()
                 cout << "Voce nao tem mais itens para emprestar..." << endl;
             } else {
                 cout << "Pessoa: ";
+<<<<<<< HEAD
+                getline(cin, item.nome);
+
+                cout << "Numero de Celular" ;
+=======
                 getline(cin, item.nome);
 
                 cout << "Numero de Celular: " ;
+>>>>>>> a34f04d24dbce9dcb7b41742f636cf77a2b28ab5
                 getline(cin,item.celular);
 
                 cout << "Item: ";
                 getline(cin, item.descricao);
 
                 //rotina para verificar se o item ja foi ou nao emprestado
+<<<<<<< HEAD
+                bool existe = falseç
+                for(int i =0 ; i< qtdEmprestimos ; ++i){
+                    if(meusItens[i].descricao == item.descricao){
+                        existe = true;
+                        break;
+                    }
+                    if(existe){
+                        cout << "Item ja esta emprestado";
+                    }
+                }
+
+=======
                 bool existe = false;
                 for(int i =0 ; i< qtdEmprestimos ; ++i){
                     if(meusItens[i].descricao == item.descricao){
@@ -53,6 +72,7 @@ int main()
                     }
                 }
 
+>>>>>>> a34f04d24dbce9dcb7b41742f636cf77a2b28ab5
                 //rotina para capturar a data de emprestimo
                 time_t agora = time(nullptr);
                 tm* t = localtime(&agora);
@@ -75,6 +95,18 @@ int main()
             if (qtdEmprestimos == 0) {
                 cout << "Nenhum item esta emprestado" << endl;
             } else {
+<<<<<<< HEAD
+                    int guardaItem = -1;
+                    if(idx == -1){
+                        cout << "item nao encontrado";
+                    }else{
+                        for(int i = guardaItem; i< qtdEmprestimos; ++i){
+                            meusItens[i] = meusItens[i +1];
+                        }
+                        qtdEmprestimos--;
+                        cout << "item devolvido";
+                    }
+=======
                     int guardaItem = -1;
                     if(guardaItem == -1){
                         cout << "item nao encontrado";
@@ -85,11 +117,18 @@ int main()
                         qtdEmprestimos--;
                         cout << "item devolvido";
                     }
+>>>>>>> a34f04d24dbce9dcb7b41742f636cf77a2b28ab5
                 for(int i=0;i < qtdEmprestimos;i++){
                     cout << "Itens: " << meusItens[i].descricao << endl;
+<<<<<<< HEAD
+                    cout << "Pessoa" << meusItens[i].nome << endl;
+                    cout << "Data de Emprestimo" << meusItens[i].data << endl;
+                    cout << "Horario de Emprestimo" << meusItens[i].hora << endl;
+=======
                     cout << "Pessoa: " << meusItens[i].nome << endl;
                     cout << "Data de Emprestimo: " << meusItens[i].data << endl;
                     cout << "Horario de Emprestimo: " << meusItens[i].hora << endl;
+>>>>>>> a34f04d24dbce9dcb7b41742f636cf77a2b28ab5
                 }
         }
             break;
