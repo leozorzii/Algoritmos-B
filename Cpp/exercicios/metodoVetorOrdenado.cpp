@@ -6,7 +6,7 @@ using namespace std;
 // o tamanho desse vetor e retorne true se o vetor estiver ordenado ou false se o vetor estiver desordenado.
 
 /*OBS---------------------------------------------------------------------------
-  --->  estao em divididos ordem crescente, decrescente e desordenado pra ficar mais completo
+  --->  estao divididos em ordem crescente, decrescente e desordenado pra ficar mais completo
 */
     //Metodos 
     bool estaCrescente(int vetor[], int tamanho){
