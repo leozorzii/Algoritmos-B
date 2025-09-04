@@ -1,2 +1,6 @@
-# Algoritmos B
-Este repositório contém as soluções para os exercícios e trabalhos da disciplina de Algoritmos, com foco na implementação de estruturas de dados e algoritmos fundamentais em C++.
+# 🚀 Algoritmos e Estruturas de Dados em C++
+
+Repositório dedicado aos estudos da disciplina de Algoritmos.
+
+🛠️ **Linguagem:** C++
+📚 **Foco:** Estruturas de Dados | Complexidade | Resolução de Problemas
