@@ -33,11 +33,6 @@ Após preencher todos os dados, use outro laço de repetição para exibir na te
 
     cout << "digite sua nota final: " << endl;
         cin >> turma[i].notaFinal;
-
-        
-        turma[i].nome;
-        turma[i].matricula;
-        turma[i].notaFinal;
         
     }
         for(int i = 0; i < 5;i++){

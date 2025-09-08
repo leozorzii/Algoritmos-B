@@ -32,9 +32,10 @@ int main(){
     float preco;
     int quantidadeEmEstoque;
 };
+
     Produto cadastro[5];
     for(int i = 0;i < 5;i++){
-    cout << " digite o nome do produto" << endl;
+    cout << " digite o nome do produto: " << endl;
         cin.ignore();
         getline(cin, cadastro[i].nome);
 
@@ -48,6 +49,7 @@ int main(){
         cin >> cadastro[i].quantidadeEmEstoque;
     
     }
+
     cout << "LISTAGEM DOS PRODUTOS COM MAIS DE 10 EM ESTOQUE" << endl;
     for(int i = 0;i < 5;i++){
     if(cadastro[i].quantidadeEmEstoque > 10){
@@ -99,6 +101,6 @@ int main(){
         cout << "Quantidade em Estoque: " << cadastro[MaiorEstoque].quantidadeEmEstoque << endl;
         cout << "--------------------------" << endl;
         cout << "Valor Total em Estoque: " << valorTotal << endl;
-        // Sempre que for acessar algo da struct dentro do vetor, precisa usar cadastro[i].atributo
+        // Sempre que for acessar algo da struct dentro do vetor, precisa usar vetor[i].atributo
     return 0;
 }
