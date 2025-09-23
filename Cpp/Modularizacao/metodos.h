@@ -51,5 +51,7 @@ void menorElemento(int vetor[], int quantidade, int tamanho) {
             sort(vetor, vetor + quantidade);
             cout << "Vetor Ordenado" << endl;
         }
+            //exercicio 4 de arquivos
+        
 
     
