@@ -29,7 +29,7 @@ string copiarArquivoParaString(string nomeArquivo){
 
     string resposta = "";
     string linha;
-    // Evita while (!eof())
+    
     while (getline(procuradorArquivo, linha)) {
         resposta += linha + "\n";
     }
@@ -38,11 +38,10 @@ string copiarArquivoParaString(string nomeArquivo){
     return resposta;
 }
 
-// Troca case-insensitive: 'a' e 'A' viram '@'
-string trocarCaracter(string texto, char letra){
-    for (size_t i = 0; i < texto.length(); i++){
-        char ch = (texto[i]);
-        if (toupper(ch) == toupper((letra))){
+
+string trocarCaracter(string texto, char letraDeOrigem){
+    for (int i = 0; i < texto.length(); i++){
+        if (toupper(texto[i]) == toupper((letra))){
             texto[i] = '@';
         }
     }
@@ -67,12 +66,15 @@ int main(){
     cout << "--- CONTEUDO ORIGINAL --\n" << conteudo << endl;
 
     // escolha do caracter para mudar no arquivo
-    char letra;
-    cout << "digite a letra decisoria" << endl;
-    cin >> letra;
+    char letraDeOrigem;
+    cout << "digite a letra de origem: " << endl;
+    cin >> letraDeOrigem;
 
-    // trocar no CONTEUDO (não no nome do arquivo)
-    string resultado = trocarCaracter(conteudo, letra);
+    char letraDestino;
+    cout << "digite a letra que quer substituir: " << endl;
+    cin >> letraDestino;
+
+    string resultado = trocarCaracter(conteudo, letraDeOrigem, letraDestino);
 
     cout << "=== CONTEUDO MODIFICADO ===\n" << resultado << endl;
 

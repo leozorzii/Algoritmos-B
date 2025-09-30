@@ -47,18 +47,9 @@ int contarVogais(string texto){
 }
 
 int main(){
-    string nomeArquivo;
-    cout << "digite o caminho do arquivo" << endl;
-    cin >> nomeArquivo;
     
-    //testar se o arquivo existe
-    if(arquivoExiste(nomeArquivo)){
-        cout << "arquivo localizado com sucesso!"<< endl;
-    } else {
-        cout << "arquivo nao localizado" << endl;
-        exit(0);
-    }
     
+
     //receber conteudo do arquivo
     string resposta = copiarArquivoParaString(nomeArquivo);
     cout << resposta << endl;

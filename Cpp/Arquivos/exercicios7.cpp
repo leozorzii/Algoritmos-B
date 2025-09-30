@@ -12,6 +12,7 @@
 
 using namespace std;
 
+
 bool arquivoExiste(const string& nomeArquivo){
     ifstream procuradorArquivo; //procurador
     procuradorArquivo.open(nomeArquivo);//ta representado em memoria ram
@@ -80,7 +81,7 @@ int main(){
 
     // 1) Exibir conteúdo em maiúsculas
     string emMaiusculas = arquivoEmMaiusculas(nomeArquivo);
-    cout << "=== CONTEUDO EM MAIUSCULAS ===\n";
+    cout << "--- CONTEUDO EM MAIUSCULAS ---\n";
     cout << emMaiusculas << endl;
 
     // 2) Contar e mostrar quantidade de palavras
