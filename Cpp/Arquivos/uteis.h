@@ -1,3 +1,14 @@
+#include <cctype>
+#include <fstream>
+#include <sstream>
+#include <filesystem> 
+#include <string>
+#include <algorithm>
+#include <iostream>
+// C++17
+#define TAM 1000
+
+
 int contarVogais(string frase) {
     int totalVogais = 0;
 
@@ -78,7 +89,7 @@ string copiarArquivo2String(string nomeArquivo) {
     return resposta;
 }
 
-#include <fstream>
+
 int conectarBase(string listaNomes[], string nomeBaseDados, int tamanho){
      ifstream procuradorArquivo; //tipo de arquivo para leitura
     procuradorArquivo.open(nomeBaseDados); 
@@ -98,7 +109,7 @@ int conectarBase(string listaNomes[], string nomeBaseDados, int tamanho){
 
 
 void exibirListaNomes(string listaNomes[], int quantidadeNomes){
-    for(int i=0.i < quantidadeNomes ;i++){
+    for(int i=0;i < quantidadeNomes ;i++){
         cout << listaNomes[i] << endl;
     }
 }
@@ -110,7 +121,7 @@ bool inserirLista(string nome, string listaNomes[], int *quantidadeNomes, int ta
     
     bool encontrou = false;
     int i;
-    for(int i=0; i < quantidadeNomes;i++){
+    for(int i = 0; i < *quantidadeNomes;i++){
         if(nome == listaNomes[i]){
             encontrou = true;
             break;
@@ -125,8 +136,58 @@ bool inserirLista(string nome, string listaNomes[], int *quantidadeNomes, int ta
     
     return true;//consegui inserir na lista
 
+}   
+ //ordenar a lista de nomes
+    void ordenarLista(string listaNomes[], int quantidade){
+        sort(listaNomes, listaNomes + quantidade);
+    }
+    //salvar usando funcao append
+    bool salvarNomeAppend(string &arquivo, string nome){
+    //arquivo sendo aberto para append ou inserir no final
+    ofstream procuradorArquivo(arquivo, ios::out | ios::app); 
+    if(!procuradorArquivo){
+        cout << "[ERROR] Nao abriu para escrita: " << filesystem::absolute(arquivo) << endl;
+        return false;
+        }
+        cout << nome << '\n' << filesystem::absolute(arquivo) << endl; //confirmacao absoluta de onde esta sendo criado o arquivo
+        return true;
+    }
 
-    //ordenar a lista de nomes
 
+    //conferir o caminho 
+    void logCaminho(string &arquivo){
+        cout << "[INFO] CWD: " << filesystem::current_path() << endl;
+        cout << "[INFO] base.dat absoluto: " << filesystem::absolute(arquivo) << endl;
+    }
+    //cadastrar os nomes
+    int cadastrarNomes(string &arquivo, string listaNomes[], int tamanho){
+        int quantidadeNomes = conectarBase(listaNomes, arquivo, TAM);
+        ordenarLista(listaNomes, TAM);
+    //listar nomes ja cadastrados
+    if(quantidadeNomes > 0){
+        exibirListaNomes(listaNomes, quantidadeNomes);
+    }
 
-}
+	string nome;
+	while (true) {
+		cout << "Digite um nome para guardar no arquivo ou fim para encerrar: ";
+		getline(cin,nome);
+		fflush(stdin);
+
+		nome = paraMaiusculo(nome);
+		if (nome == "FIM"){
+			break;
+		}
+            string base = "base.dat";
+            logCaminho(base);
+        if(inserirLista(nome, listaNomes, &quantidadeNomes, TAM)){//passa o endereço da variavel de nomes
+        ordenarLista(listaNomes, quantidadeNomes);
+            if(!salvarNomeAppend(arquivo, nome)){
+                cout << "falha ao gravar no arquivo!" << endl;
+                }else{
+                    cout << "nome cadastrado!" << endl;
+                }
+            }
+        }
+      return quantidadeNomes;
+     }
