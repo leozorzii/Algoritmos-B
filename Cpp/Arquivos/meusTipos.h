@@ -7,6 +7,9 @@ typedef struct{
     string email;
 }Pessoa;
 
-
+typedef struct{
+    string placa;
+    string dataEntrada;
+}Veiculo;
 
 
