@@ -6,7 +6,6 @@
 using namespace std;
 
 #include "meusTipos.h"
-// aqui naoooooooooooooooooooo
 
 void gravarPessoaBase(string nome, string email, string baseDados){
    //abrir arquivo para escrita
@@ -240,8 +239,8 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
             cout << "Saida liberada para: " << placa << endl;
         }else{
             cout << "placa nao encontrada" << endl;
-            return j;
         }
+        return -1;
 }
 
 void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& baseDados){
@@ -260,14 +259,12 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 listarCarros(garagem, qtdCarros);
                 break;
             case 2:
-                qtdCarros = cadastrarCarro(garagem, qtdCarros, tamanho, baseDados);
+                qtdCarros = cadastrarCarros(garagem, qtdCarros, tamanho, baseDados);
                 break;
             case 3: {
                 string placa;
-                cin.ignore(numeric_limits<streamsize>::max(), '\n');
                 cout << "Informe placa: ";
                 getline(cin, placa);
-                for(auto& c: placa) c = toupper((unsigned char)c);
                 qtdCarros = retirarVeiculo(garagem, qtdCarros, placa);
                 break;
             }

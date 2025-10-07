@@ -4,13 +4,7 @@
 
 using namespace std;
 
-typedef struct{
-    string placa;
-    string dataEntrada;
-}Veiculo;
-
-
-
+#include"meusTipos.h"
 #include"meusMetodos.h"
 
 int main(){
@@ -18,8 +12,8 @@ Veiculo garagem[TAM];
     int qtdCarros = 0;
     string baseDados = "estacionamento.csv";
     
-     qtdCarros = conectarBase(baseDados, garagem, TAM);
-     menu(garagem, TAM, qtdCarros, baseDados);
+     qtdCarros = conectarBaseVeiculos(baseDados, garagem, TAM);
+     menuVeiculos(garagem, TAM, qtdCarros, baseDados);
 
     return 1;
 }
