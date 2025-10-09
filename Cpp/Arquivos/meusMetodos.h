@@ -143,17 +143,6 @@ int conectarBase(string arquivo, Pessoa vetor[], int tamanho){
 -----------------------------------------------------
 */
 
-
-
-
-
-
-
-
-
-
-
-
 void gravarCarroBase(string placa, string dataEntrada, string baseDados){
     ofstream procuradorArquivo(baseDados, ios::out | ios::app);
     if(!procuradorArquivo){
@@ -179,19 +168,26 @@ int conectarBaseVeiculos(const string& arquivo, Veiculo garagem[], int tamanho){
     string vetorLinha[2];
 	while (!procuradorArquivo.eof()) {
 		getline(procuradorArquivo,linha); //lendo a linha inteira
-        //linha = Leonardo Zorzi, leonardo.zorzi@ufn.edu.br
+
         split(vetorLinha, linha, ",");
         string placa = vetorLinha[0];
+        string data = vetorLinha[1];
+
+        if(placa.empty()) continue;//se a placa estiver vazia, continua
+        placaParaMaiusculo(placa);
+
         garagem[qtdCarros].placa = placa;
-        garagem[qtdCarros].dataEntrada = vetorLinha[1];
+        garagem[qtdCarros].dataEntrada = data;
         qtdCarros++;
+
+       
     } 
     procuradorArquivo.close();
 
     return qtdCarros;
 }
 
-int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDados){
+int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDados, string placa){
     if(tamanho == qtdCarros){
         cout << "Estrutura de Dados lotada" << endl;
         return qtdCarros;
@@ -202,6 +198,7 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
     cout << "placa: " << endl;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa \n pendente antes do getline
     getline(cin, placa);
+    placaParaMaiusculo(placa);
 
     cout << "dataEntrada: " << endl;
     cin >> dataEntrada;
@@ -217,6 +214,7 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
     void listarCarros(Veiculo garagem[], int qtdCarros){
     cout << "Listar Carros: " << endl;
     for(int i=0; i < qtdCarros; i++){
+        if(garagem[i].placa.empty()) continue;
         cout << "placa: "<< garagem[i].placa << endl;
         cout << "dataEntrada: " << garagem[i].dataEntrada << endl;
         cout << "_________________" << endl;
@@ -225,22 +223,25 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
     cout << "total de registros: " << qtdCarros << endl;
 }   
 
-    int retirarVeiculo(Veiculo garagem[], int qtdCarros, string placa){
+    int retirarVeiculo(Veiculo garagem[], int qtdCarros, string placaBusca){
+     
         int j=0;
         bool estaGaragem = false;
         for(int i=0; i < qtdCarros;i++){
-            if(!estaGaragem && garagem[i].placa == placa){
+            if(!estaGaragem && garagem[i].placa == placaBusca){
                 estaGaragem = true;
                 continue;
             }
             garagem[j++] = garagem[i];
         }
         if(estaGaragem){
-            cout << "Saida liberada para: " << placa << endl;
+            cout << "Saida liberada para: " << placaBusca << endl;
+                return j; 
         }else{
             cout << "placa nao encontrada" << endl;
+                return qtdCarros;
         }
-        return -1;
+        
 }
 
 void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& baseDados){
@@ -263,9 +264,12 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 break;
             case 3: {
                 string placa;
-                cout << "Informe placa: ";
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                cout << "informe a placa: ";
                 getline(cin, placa);
-                qtdCarros = retirarVeiculo(garagem, qtdCarros, placa);
+                //padroniza maiusculo
+                placaParaMaiusculo(placa);
+                qtdCarros = retirarVeiculo(garagem, qtdCarros,placa);
                 break;
             }
             case 4:
@@ -275,4 +279,14 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 cout << "opcao invalida\n";
         }
     } while(opcao != 4);
+}
+
+
+//funcoes complementares
+
+void placaParaMaiusculo(string placa) {
+    for (int i = 0; i < placa.size(); i++) {
+        placa[i] = toupper(placa[i]);
+    }
+   
 }
