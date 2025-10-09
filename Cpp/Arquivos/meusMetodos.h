@@ -2,6 +2,7 @@
 #include <string>
 #include <fstream>
 #include<iostream>
+#include <cctype>
 #define TAM 1000
 using namespace std;
 
@@ -142,6 +143,12 @@ int conectarBase(string arquivo, Pessoa vetor[], int tamanho){
 ---------------------------------------------------
 -----------------------------------------------------
 */
+v   oid placaParaMaiusculo(string placa) {
+    for (int i = 0; i < placa.size(); i++) {
+        placa[i] = toupper(placa[i]);
+    }
+   
+}
 
 void gravarCarroBase(string placa, string dataEntrada, string baseDados){
     ofstream procuradorArquivo(baseDados, ios::out | ios::app);
@@ -187,7 +194,7 @@ int conectarBaseVeiculos(const string& arquivo, Veiculo garagem[], int tamanho){
     return qtdCarros;
 }
 
-int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDados, string placa){
+int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDados){
     if(tamanho == qtdCarros){
         cout << "Estrutura de Dados lotada" << endl;
         return qtdCarros;
@@ -279,14 +286,4 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 cout << "opcao invalida\n";
         }
     } while(opcao != 4);
-}
-
-
-//funcoes complementares
-
-void placaParaMaiusculo(string placa) {
-    for (int i = 0; i < placa.size(); i++) {
-        placa[i] = toupper(placa[i]);
-    }
-   
 }
