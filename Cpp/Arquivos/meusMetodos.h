@@ -143,11 +143,10 @@ int conectarBase(string arquivo, Pessoa vetor[], int tamanho){
 ---------------------------------------------------
 -----------------------------------------------------
 */
-v   oid placaParaMaiusculo(string placa) {
-    for (int i = 0; i < placa.size(); i++) {
-        placa[i] = toupper(placa[i]);
-    }
-   
+void placaParaMaiusculo(string& placa) {//evitar sombreamento e modifica o objeto original
+   for(char& ch: placa){
+    ch = static_cast<char>(toupper(static_cast<unsigned char>(ch)));
+   }
 }
 
 void gravarCarroBase(string placa, string dataEntrada, string baseDados){
@@ -158,11 +157,23 @@ void gravarCarroBase(string placa, string dataEntrada, string baseDados){
     }
     procuradorArquivo << placa << "," << dataEntrada << "\n";
 }
+
+void salvarGaragemBase(const string& baseDados, Veiculo garagem[], int qtdCarros){
+    ofstream out(baseDados, ios::out | ios::trunc);//para apagar e/ou reescrever
+    if(!out){
+        cout << "falha ao abrir base de veiculos" << endl;
+        return;
+    }
+    for(int i=0; i< qtdCarros;++i){
+        if(garagem[i].placa.empty()) continue;
+        out << garagem[i].placa << "," << garagem[i].dataEntrada << endl;
+    }
+}
 int conectarBaseVeiculos(const string& arquivo, Veiculo garagem[], int tamanho){
     int qtdCarros = 0;
     ifstream procuradorArquivo(arquivo);
     if(!procuradorArquivo){
-        cout << "Base de veiculos nao localizada. Iniciando vazio.\n";
+        cout << "Base de veiculos nao localizada.\n";
         return 0;
     }
     if(qtdCarros == tamanho){
@@ -170,10 +181,10 @@ int conectarBaseVeiculos(const string& arquivo, Veiculo garagem[], int tamanho){
         exit(0);
     }
 
-    //le o arquivo capturando as pessoas, linha a linha
+    //le o arquivo capturando os carros, linha a linha
     string linha;
     string vetorLinha[2];
-	while (!procuradorArquivo.eof()) {
+	while (getline(procuradorArquivo, linha)) {
 		getline(procuradorArquivo,linha); //lendo a linha inteira
 
         split(vetorLinha, linha, ",");
@@ -181,6 +192,7 @@ int conectarBaseVeiculos(const string& arquivo, Veiculo garagem[], int tamanho){
         string data = vetorLinha[1];
 
         if(placa.empty()) continue;//se a placa estiver vazia, continua
+
         placaParaMaiusculo(placa);
 
         garagem[qtdCarros].placa = placa;
@@ -202,21 +214,22 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
 
     string placa, dataEntrada;
 
-    cout << "placa: " << endl;
+    cout << "placa(AAALLLL): " << endl;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // limpa \n pendente antes do getline
     getline(cin, placa);
+
     placaParaMaiusculo(placa);
 
-    cout << "dataEntrada: " << endl;
+    cout << "dataEntrada(HH:MM): " << endl;
     cin >> dataEntrada;
 
     garagem[qtdCarros].placa = placa;
     garagem[qtdCarros].dataEntrada = dataEntrada;
-    qtdCarros += 1;
+    ++qtdCarros;
 
     gravarCarroBase(placa, dataEntrada, baseDados);
-    return qtdCarros + 1;
-    
+    return qtdCarros;
+
 }
     void listarCarros(Veiculo garagem[], int qtdCarros){
     cout << "Listar Carros: " << endl;
@@ -230,7 +243,7 @@ int cadastrarCarros(Veiculo garagem[], int qtdCarros, int tamanho, string baseDa
     cout << "total de registros: " << qtdCarros << endl;
 }   
 
-    int retirarVeiculo(Veiculo garagem[], int qtdCarros, string placaBusca){
+    int retirarVeiculo(Veiculo garagem[], int qtdCarros, string& placaBusca){
      
         int j=0;
         bool estaGaragem = false;
@@ -276,7 +289,11 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 getline(cin, placa);
                 //padroniza maiusculo
                 placaParaMaiusculo(placa);
-                qtdCarros = retirarVeiculo(garagem, qtdCarros,placa);
+                int qtdCarrosNova = retirarVeiculo(garagem, qtdCarros,placa);
+                if(qtdCarrosNova != qtdCarros){
+                    qtdCarros = qtdCarrosNova;
+                    salvarGaragemBase(baseDados, garagem, qtdCarros);
+                }
                 break;
             }
             case 4:
