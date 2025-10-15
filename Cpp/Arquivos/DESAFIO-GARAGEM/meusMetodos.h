@@ -5,7 +5,7 @@
 #include <cctype>
 #define TAM 1000
 using namespace std;
-
+//aqui includes do pessoa, mais abaixo sobre o GARAGEM------------
 #include "meusTipos.h"
 
 void gravarPessoaBase(string nome, string email, string baseDados){
@@ -137,13 +137,14 @@ int conectarBase(string arquivo, Pessoa vetor[], int tamanho){
 
 
 /*P A R T E   D O   D E S A F I O   G A R A G E M
-----------------------------------------------
 ------------------------------------------------
--------------------------------------------------
----------------------------------------------------
------------------------------------------------------
-*/
-void placaParaMaiusculo(string& placa) {//evitar sombreamento e modifica o objeto original
+------------------------------------------------
+                   |
+                   |
+                   |
+                   V
+                                                   */
+void placaParaMaiusculo(string& placa) {//modifica o objeto original
    for(char& ch: placa){
     ch = static_cast<char>(toupper(static_cast<unsigned char>(ch)));
    }
@@ -287,7 +288,7 @@ void menuVeiculos(Veiculo garagem[], int tamanho, int& qtdCarros, const string& 
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
                 cout << "informe a placa: ";
                 getline(cin, placa);
-                //padroniza maiusculo
+                //rotina que padroniza maiusculo
                 placaParaMaiusculo(placa);
                 int qtdCarrosNova = retirarVeiculo(garagem, qtdCarros,placa);
                 if(qtdCarrosNova != qtdCarros){
