@@ -17,8 +17,6 @@ void substituirPares(int *v, int tam,int &qtdSubstituida){
         if(v[i]%2==0){
             v[i] = 0;
             ++qtdSubstituida;
-            cout <<"---------" << endl;
-            cout << v[i] << endl;
         }
     }
 }
@@ -34,9 +32,9 @@ int main(){
     int numeros[n];
     int valornovo;
     popular(numeros,n);
-    exibir(numeros, n);
     int qtd;
     substituirPares(numeros,n,qtd);
+    exibir(numeros, n);
     cout << "quantidade de numeros pares substituidos: " << qtd << endl;
 
     /*faça um metodo que receba um vetor, substitua todos os elementos pares por 0 e retorne
