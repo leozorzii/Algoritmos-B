@@ -75,16 +75,16 @@ int main(){
         exit(0);
     }
     
-    // (opcional) mostrar conteúdo original
+   
     string resposta = copiarArquivoParaString(nomeArquivo);
     cout << "=== CONTEUDO ORIGINAL ===\n" << resposta << endl;
 
-    // 1) Exibir conteúdo em maiúsculas
+ 
     string emMaiusculas = arquivoEmMaiusculas(nomeArquivo);
     cout << "--- CONTEUDO EM MAIUSCULAS ---\n";
     cout << emMaiusculas << endl;
 
-    // 2) Contar e mostrar quantidade de palavras
+
     size_t totalPalavras = contarPalavras(nomeArquivo);
     cout << "Quantidade de palavras: " << totalPalavras << endl;
 

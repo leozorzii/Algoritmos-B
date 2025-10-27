@@ -1,0 +1,10 @@
+
+bryan,900,23
+
+Murdoch,900,15
+
+zerin,600,35
+
+xxtastoxx,345,12
+
+Goblin,300,45
