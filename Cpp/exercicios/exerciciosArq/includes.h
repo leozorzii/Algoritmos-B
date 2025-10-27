@@ -69,18 +69,19 @@ void gravarAlunoArquivo(Aluno vetor[],int tamanho){
 
 }
 
-    string lerArquivosParaStruct(Aluno vetor[], string nomearquivo, int tamanho){
-        ifstream procuradorArquivo; //tipo de arquivo para leitura
-    procuradorArquivo.open("nomeArquivo"); 
-
+    string lerArquivosParaString(string nomearquivo){
+       ifstream procuradorArquivo; //procurador
+    procuradorArquivo.open("alunos.txt");//ta representado em memoria ram
+    
     string resposta = "";
     string linha;
-    while (!procuradorArquivo.eof()) {
+	while (!procuradorArquivo.eof()) {
 		getline(procuradorArquivo,linha); //lendo a linha inteira
 		resposta = resposta + linha + "\n";
-	}
-  
+    } 
     procuradorArquivo.close();
+    cout << "---------" << endl;
+    cout << "Lista de alunos" << endl;
 
     return resposta;
 }

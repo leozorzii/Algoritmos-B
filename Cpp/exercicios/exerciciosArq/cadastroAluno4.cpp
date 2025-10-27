@@ -34,7 +34,7 @@
 
     gravarAlunoArquivo(vetor,tam);
 
-    string resultado = lerArquivosParaStruct(vetor, "alunos.txt", tam);
+    string resultado = lerArquivosParaString("alunos.txt");
     cout << resultado;
     
     return 0;
